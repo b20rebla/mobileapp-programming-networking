@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         String s = readFile("mountains.json");
         Log.d("MainActivity","The following text was found in textfile:\n\n"+s);
 
+        arrayMountain = new ArrayList<>();
+        adapter = new ArrayAdapter<>(MainActivity.this, R.layout.listitem, R.id.listitem1, arrayMountain);
+
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
     }
 
