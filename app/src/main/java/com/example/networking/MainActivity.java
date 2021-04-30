@@ -53,6 +53,22 @@ public class MainActivity extends AppCompatActivity {
         ListView myListView = findViewById(R.id.listview);
         myListView.setAdapter(adapter);
 
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Här visar jag genom adapter. andra properties ex höjd osv???
+                String name = arrayMountain.get(position).getName("name");
+                String type = arrayMountain.get(position).getType("type");
+                String location = arrayMountain.get(position).getLocation("location");
+                String sentece = name + " <<<< " + type + "<<<<< " +location ;
+
+
+                Toast.makeText(MainActivity.this, sentece, Toast.LENGTH_SHORT).show();
+                //Log.d("DATA", "Hittade berg i log.d" + adapter.getItem(position));
+            }
+        });
+
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
     }
 
