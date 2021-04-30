@@ -6,7 +6,11 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         arrayMountain = new ArrayList<>();
         adapter = new ArrayAdapter<>(MainActivity.this, R.layout.listitem, R.id.listitem1, arrayMountain);
+
+        ListView myListView = findViewById(R.id.listview);
+        myListView.setAdapter(adapter);
 
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
     }

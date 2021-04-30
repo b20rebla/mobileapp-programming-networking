@@ -14,4 +14,10 @@ public class Mountain {
     private int cost;
 
     private Auxdata auxdata;
+    //Vill kalla atrributen för detta, namnger, måste ha detta för att kunna returnera våra värden sen som kommer med koden som visas nedanför
+    public Mountain(String name,String type,String location){
+        this.name = name;
+        this.type = type;
+        this.location= location;
+    }
 }
