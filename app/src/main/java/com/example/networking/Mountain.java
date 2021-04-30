@@ -22,15 +22,15 @@ public class Mountain {
         this.location= location;
     }
 
-    public String getName( String name) {
+    public String getName() {
         return name;
     }
 
-    public String getType( String type) {
+    public String getType() {
         return type;
     }
 
-    public String getLocation(String location) {
+    public String getLocation() {
         return location;
     }
 
