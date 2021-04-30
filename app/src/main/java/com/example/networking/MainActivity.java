@@ -15,16 +15,33 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Mountain> arrayMountain;
     private ArrayAdapter<Mountain> adapter;
 
+    @SuppressWarnings("SameParameterValue")
+    private String readFile(String fileName) {
+        try {
+            //noinspection CharsetObjectCanBeUsed
+            return new Scanner(getApplicationContext().getAssets().open(fileName), Charset.forName("UTF-8").name()).useDelimiter("\\A").next();
+        } catch (IOException e) {
+            Log.e("TAG", "Could not read file: " + fileName);
+            return null;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        String s = readFile("mountains.json");
+        Log.d("MainActivity","The following text was found in textfile:\n\n"+s);
 
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
     }
