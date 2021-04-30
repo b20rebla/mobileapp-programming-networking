@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String json) {
             Log.d("TAG", json);
+
+            adapter.notifyDataSetChanged();
         }
     }
 }
