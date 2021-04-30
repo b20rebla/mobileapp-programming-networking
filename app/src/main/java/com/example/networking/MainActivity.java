@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -116,7 +118,20 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String json) {
             Log.d("TAG", json);
 
+            Gson gson = new Gson();
+            Mountain[] tempmountains = gson.fromJson(json, Mountain[].class);
+
+            for (int i = 0; i < tempmountains.length; i++) {
+                Mountain m = tempmountains[i];
+                Log.d("TAG", m.toString());
+
+
+                arrayMountain.add(m);
+
+            }
+
             adapter.notifyDataSetChanged();
+
         }
     }
 }
