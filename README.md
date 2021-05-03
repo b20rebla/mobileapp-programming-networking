@@ -1,42 +1,61 @@
 
 # Rapport
 
-**Skriv din rapport här!**
-
-_Du kan ta bort all text som finns sedan tidigare_.
-
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
+Assets mapp skapades och en ny fil lades in (mountains.json), där i lades sedan koden för alla berg in. Detta gjordes för att få den datan att visas som en sträng. Koden säger att
+den ska hämta datan som finns i Assets och eftersom filen bara ska läsas en gång så lades den andra kodsnutten in i onCreate och där i står namnet på filen som eftersöks.
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+@SuppressWarnings("SameParameterValue")
+private String readFile(String fileName) {
+    try {
+        //noinspection CharsetObjectCanBeUsed
+        return new Scanner(getApplicationContext().getAssets().open(fileName), Charset.forName("UTF-8").name()).useDelimiter("\\A").next();
+    } catch (IOException e) {
+        Log.e(TAG, "Could not read file: " + fileName);
+        return null;
     }
 }
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+```
+protected void onCreate(Bundle savedInstanceState) {
+String s = readFile("mountains.json");
+Log.d("MainActivity","The following text was found in textfile:\n\n"+s);
+```
 
-![](android.png)
+Jag skapade en klass som döptes till Mountain. I den klassen lades bland annat koden in som visas här nedanför. Denna kod säger att den ska innehålla informationen som finns i mountains.json.
+Med hjälp av denna kod har förutsättningarna givits för att kunna låta gson biblioteket skapa bergen.
 
-Läs gärna:
+```
+public class Mountain {
+    private String ID;
+    private String name;
+    private String type;
+```
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+Toast View valdes, dvs att namnet på bergen skulle visas i appen samt två andra egenskaper vilket var namn, typ och plats. När man klickar på till exempel K2 så blir resultatet det
+som bild1 visar. Koden som visas som ligger i klassen Mountain behöver existera eftersom att det senare ska vara möjligt för värdena ska visas i appen.
+Toast som finns i MainActivity lades i en setOnItemClickListener tillsammans med den andra kodsnutten som visas här nedanför för att Toast skulle veta vad för information som skulle visas.
+
+```
+public Mountain(String name,String type,String location){
+        this.name = name;
+        this.type = type;
+        this.location= location;
+    }
+```
+
+```
+myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = arrayMountain.get(position).getName();
+                String type = arrayMountain.get(position).getType();
+                String location = arrayMountain.get(position).getLocation();
+                String sentence = name + " <<<< " + type + "<<<<< " +location ;
+```
+
+![](bild1.png)
+
+

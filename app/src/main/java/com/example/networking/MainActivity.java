@@ -59,12 +59,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Här visar jag genom adapter. andra properties ex höjd osv???
                 String name = arrayMountain.get(position).getName();
                 String type = arrayMountain.get(position).getType();
                 String location = arrayMountain.get(position).getLocation();
                 String sentence = name + " <<<< " + type + "<<<<< " +location ;
-
 
                 Toast.makeText(MainActivity.this, sentence, Toast.LENGTH_SHORT).show();
                 //Log.d("TAG", "Hittade berg i log.d" + adapter.getItem(position));
