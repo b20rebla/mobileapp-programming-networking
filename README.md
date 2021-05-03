@@ -23,8 +23,11 @@ String s = readFile("mountains.json");
 Log.d("MainActivity","The following text was found in textfile:\n\n"+s);
 ```
 
-Jag skapade en klass som döptes till Mountain. I den klassen lades bland annat koden in som visas här nedanför. Denna kod säger att den ska innehålla informationen som finns i mountains.json.
-Med hjälp av denna kod har förutsättningarna givits för att kunna låta gson biblioteket skapa bergen.
+Jag skapade en klass som döptes till Mountain. I den klassen lades bland annat koden in som visas här nedanför. Denna kod skpapar datatyper för ID, name m.m för att det ska vara möjligt
+att skriva ut alla berg som finns i mountains.json.
+Eftersom att auxdata är ett objekt och fanns inte sedan tidigare så var jag tvungen att skapa en ny datatyp som heter Auxdata och det gjorde jag genom att skapa en klass som döptes
+döptes till Auxdata. I klassen Auxdata görs det på samma sätt som med klassen Mountain.
+Med hjälp av båda kodsnuttarna har förutsättningarna givits för att kunna låta gson biblioteket skapa bergen.
 
 ```
 public class Mountain {
@@ -33,8 +36,12 @@ public class Mountain {
     private String type;
 ```
 
+```
+private Auxdata auxdata;
+```
+
 Toast View valdes, dvs att namnet på bergen skulle visas i appen samt två andra egenskaper vilket var namn, typ och plats. När man klickar på till exempel K2 så blir resultatet det
-som bild1 visar. Koden som visas som ligger i klassen Mountain behöver existera eftersom att det senare ska vara möjligt för värdena ska visas i appen.
+som bild1 visar. Koden som visas som ligger i klassen Mountain behöver existera eftersom att det senare ska vara möjligt för värdena att visas i appen.
 Toast som finns i MainActivity lades i en setOnItemClickListener tillsammans med den andra kodsnutten som visas här nedanför för att Toast skulle veta vad för information som skulle visas.
 
 ```
